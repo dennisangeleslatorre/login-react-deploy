@@ -7,7 +7,6 @@ const FacebookLoginButton = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        console.log("facebookAppId", facebookAppId)
         window.fbAsyncInit = function() {
             window.FB.init({
                 appId      : facebookAppId,
@@ -31,7 +30,8 @@ const FacebookLoginButton = () => {
             window.FB.login(response => {
                 setIsLoggedIn(response.status === 'connected');
                 console.log("facebook login", response);
-            }, {scope: 'email,user_birthday,user_gender,public_profile' });
+            }, {scope: 'email,user_birthday,user_gender'});
+            //Permisos - public_profile
         };
         const handleLogout = () => {
             window.FB.logout(response => {

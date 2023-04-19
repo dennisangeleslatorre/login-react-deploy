@@ -14,7 +14,6 @@ const FacebookLoginButton = () => {
                 xfbml      : true,
                 version    : 'v16.0'
             });
-            window.FB.AppEvents.logPageView();
             window.FB.getLoginStatus(response => {
                 setIsLoggedIn(response.status === 'connected');
             });
@@ -29,9 +28,7 @@ const FacebookLoginButton = () => {
         }, []);
 
         const handleLogin = () => {
-            console.log("ASDAS");
             window.FB.login(response => {
-                console.log("response", response);
                 setIsLoggedIn(response.status === 'connected');
                 console.log("facebook login", response);
             });

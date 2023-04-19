@@ -11,10 +11,10 @@ const FacebookLoginButton = () => {
         window.fbAsyncInit = function() {
             window.FB.init({
                 appId      : facebookAppId,
-                cookie     : true,
                 xfbml      : true,
                 version    : 'v16.0'
             });
+            window.FB.AppEvents.logPageView();
             window.FB.getLoginStatus(response => {
                 setIsLoggedIn(response.status === 'connected');
             });

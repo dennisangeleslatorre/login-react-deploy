@@ -31,7 +31,7 @@ const FacebookLoginButton = () => {
             window.FB.login(response => {
                 setIsLoggedIn(response.status === 'connected');
                 console.log("facebook login", response);
-            });
+            }, {scope: 'email,user_birthday,user_gender,public_profile' });
         };
         const handleLogout = () => {
             window.FB.logout(response => {

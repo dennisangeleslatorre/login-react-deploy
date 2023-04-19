@@ -7,12 +7,13 @@ const FacebookLoginButton = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
+        console.log("facebookAppId", facebookAppId)
         window.fbAsyncInit = function() {
             window.FB.init({
                 appId      : facebookAppId,
                 cookie     : true,
                 xfbml      : true,
-                version    : 'v15.0'
+                version    : 'v16.0'
             });
             window.FB.getLoginStatus(response => {
                 setIsLoggedIn(response.status === 'connected');
@@ -22,9 +23,9 @@ const FacebookLoginButton = () => {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {return;}
             js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            js.src = "https://connect.facebook.net/es_LA/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+          }(document, 'script', 'facebook-jssdk'));
         }, []);
 
         const handleLogin = () => {

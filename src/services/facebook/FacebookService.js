@@ -16,6 +16,13 @@ const facebookAppSecret = process.env.REACT_APP_FACEBOOK_APP_SECRET;
     return status;
 }*/
 
+const header = {
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    }
+}
+
 export const loginService = () => {
     let status = false;
     window.FB.login(response => {
@@ -39,5 +46,5 @@ export const generateToken = (token) => {
     client_id=${facebookAppId}&
     client_secret=${facebookAppSecret}&
     fb_exchange_token=${token}`;
-    fetch(url).then(res => console.log(res));
+    fetch(url, header).then(res => console.log(res));
 }

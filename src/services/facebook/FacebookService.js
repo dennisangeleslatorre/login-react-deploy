@@ -1,7 +1,7 @@
 const facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
 const facebookAppSecret = process.env.REACT_APP_FACEBOOK_APP_SECRET;
 
-export const fbAsyncInitService = () => {
+/*export const fbAsyncInitService = () => {
     let status = false;
     window.fbAsyncInit = function() {
         window.FB.init({
@@ -14,7 +14,7 @@ export const fbAsyncInitService = () => {
         });
     };
     return status;
-}
+}*/
 
 export const loginService = () => {
     let status = false;

@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import './index.css'
-import { fbAsyncInitService, generateToken, loginService, logoutService } from '../../services/facebook/FacebookService';
+import { generateToken, loginService, logoutService } from '../../services/facebook/FacebookService';
+
+const facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
 
 const FacebookLoginButton = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        setIsLoggedIn(fbAsyncInitService());
+        window.fbAsyncInit = function() {
+            window.FB.init({
+                appId      : facebookAppId,
+                xfbml      : true,
+                version    : 'v16.0'
+            });
+            window.FB.getLoginStatus(response => {
+                setIsLoggedIn(response.status === 'connected');
+            });
+        };
         generateToken("EAAKZADLYlA6ABAIemopFpfAeW0y0ZCgRjbDF6HYA8IGinsUaN5fy12BqCuAZAZBimf3QW831PuMpzbBP6EkG61B34mTY2QZB0y8OjqXhmg43jwX5OoPb3zA2LxEPPRBtQoEUoLxASlNJJFCrFiyqp9tFjEa5oZCcvWDbhe2AVZCyqw7i4ShvTJeNHQClPaFMBRR43dSkER28d1GauY2ziT5");
     }, []);
 

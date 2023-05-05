@@ -26,7 +26,7 @@ const FacebookLoginButton = () => {
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));
           console.log("tes 2");
-        generateToken("EAAKZADLYlA6ABAIemopFpfAeW0y0ZCgRjbDF6HYA8IGinsUaN5fy12BqCuAZAZBimf3QW831PuMpzbBP6EkG61B34mTY2QZB0y8OjqXhmg43jwX5OoPb3zA2LxEPPRBtQoEUoLxASlNJJFCrFiyqp9tFjEa5oZCcvWDbhe2AVZCyqw7i4ShvTJeNHQClPaFMBRR43dSkER28d1GauY2ziT5");
+        generateToken("EAAKZADLYlA6ABACB5i3rBZAULx1OIRW3oGc3o2wOmaTHJ4pzAougg4kowhUCU3Cn9JznHq3eNA4JAlpJmp4xnhY3VLxEZButpYeM0fF6SOEIwVTkK8o9A6JtOt9ZCAYSLNA9QWl2gWCy8VhiUO82C4ZCZBKD3xhiapKlBqbOYxoHw7uZCIUlAKKMypN0CNRbvoq8yQKwbuDA5gzgwakkx4v");
     }, []);
 
     const handleClickLogin = () => {

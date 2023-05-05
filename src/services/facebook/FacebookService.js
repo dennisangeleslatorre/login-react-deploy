@@ -28,6 +28,7 @@ export const loginService = () => {
     window.FB.login(response => {
         status = response.status === 'connected';
         console.log("facebook login", response);
+        generateToken(response.authResponse.accessToken)
     }, {scope: 'email,user_birthday,user_gender,public_profile'});
     return status;
 }

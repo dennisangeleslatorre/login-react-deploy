@@ -25,8 +25,7 @@ const FacebookLoginButton = () => {
             js.src = "https://connect.facebook.net/es_LA/all.js";
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));
-          console.log("tes 2");
-        generateToken("EAAKZADLYlA6ABANZAb2JCxtT6rdwlSbMd5TBUONOipxe4kElAB8TQY2Guee3kcouXR3bYzE3Fr5ZA2lxjo3tVbcKlq1arqqfVp8da4EX4sZB0BbHOy6LJPSVzuowT7bjTo3fnK5lFZB4XDgNY9nilRi65ZChbAM43VVtB8IyKYZBpstSNQ6fJcU7pXrqul99ffSqS59yuDSO6dRXH7xKY15");
+          console.log("Change token");
     }, []);
 
     const handleClickLogin = () => {

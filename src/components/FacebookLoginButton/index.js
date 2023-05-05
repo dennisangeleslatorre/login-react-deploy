@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './index.css'
-import { generateToken, loginService, logoutService } from '../../services/facebook/FacebookService';
+import { loginResponse, logoutService } from '../../services/facebook/FacebookService';
 
 const facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
 
@@ -28,12 +28,16 @@ const FacebookLoginButton = () => {
           console.log("Change token");
     }, []);
 
-    const handleClickLogin = () => {
-        setIsLoggedIn(loginService());
+    const handleClickLogin = async () => {
+        const response = await loginResponse();
+        if(response.isLogged) {
+            setIsLoggedIn(true);
+        }
     };
 
-    const handleLogout = () => {
-        setIsLoggedIn(logoutService());
+    const handleLogout = async () => {
+        const response = await logoutService();
+        setIsLoggedIn(response);
     };
 
     return (

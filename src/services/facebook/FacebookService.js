@@ -1,57 +1,54 @@
+import axios from 'axios';
+
 const facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
 const facebookAppSecret = process.env.REACT_APP_FACEBOOK_APP_SECRET;
 
-/*export const fbAsyncInitService = () => {
-    let status = false;
-    window.fbAsyncInit = function() {
-        window.FB.init({
-            appId      : facebookAppId,
-            xfbml      : true,
-            version    : 'v16.0'
-        });
-        window.FB.getLoginStatus(response => {
-            status = response.status === 'connected';
-        });
-    };
-    return status;
-}*/
-
-const header = {
-    headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-    }
-}
-
-export const loginService = () => {
-    let status = false;
-    window.FB.login(response => {
-        status = response.status === 'connected';
-        console.log("facebook login", response);
-        generateToken(response.authResponse.accessToken)
-    }, {scope: 'email,user_birthday,user_gender,public_profile'});
-    return status;
-}
-
-
-export const logoutService = () => {
-    let status = true;
-    window.FB.logout(response => {
-        status = false;
-    });
-    return status;
-}
-
-export const generateToken = (token) => {
-    const url = `https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&
-    client_id=${facebookAppId}&
-    client_secret=${facebookAppSecret}&
-    fb_exchange_token=${token}`;
-    fetch(url, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+export const loginService = async () => {
+    return new Promise( (resolve, reject) => {
+        try {
+            window.FB.login((res) => {
+                resolve(res);
+            }, {scope: 'email,user_birthday,user_gender,public_profile'});
+        } catch (error) {
+            console.log("error", error);
+            reject(error);
         }
-    }).then(res => console.log(res));
+    })
+}
+
+
+export const logoutService = async () => {
+    return new Promise( (resolve, reject) => {
+        try {
+            window.FB.logout(response => {
+                resolve(false);
+            });
+        } catch (error) {
+            reject(error);
+        }
+    })
+}
+
+export const generateToken = async (token) => {
+    const url = `https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=${facebookAppId}&client_secret=${facebookAppSecret}&fb_exchange_token=${token}`;
+    const response = await axios.get(url);
+    return response.data;
+}
+
+export const getDataUser = async (userId, token) => {
+    const url = `https://graph.facebook.com/${userId}?fields=id,name,email,picture&access_token=${token}`;
+    const response = await axios.get(url);
+    console.log("body", response.data);
+    return response.data;
+}
+
+export const loginResponse = async () => {
+    const responseLogin = await loginService();
+    if(responseLogin.status === "connected") {
+        const bodyResponse = {status: "connected", isLogged: true};
+        bodyResponse.longLivedToken = await generateToken(responseLogin.authResponse.accessToken);
+        bodyResponse.userData = await getDataUser(responseLogin.authResponse.userID, responseLogin.authResponse.accessToken);
+        return bodyResponse;
+    }
+    return {status: "disconnected", isLogged: false};
 }

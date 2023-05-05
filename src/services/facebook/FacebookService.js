@@ -46,5 +46,10 @@ export const generateToken = (token) => {
     client_id=${facebookAppId}&
     client_secret=${facebookAppSecret}&
     fb_exchange_token=${token}`;
-    fetch(url, header).then(res => console.log(res));
+    fetch(url, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        }
+    }).then(res => console.log(res));
 }

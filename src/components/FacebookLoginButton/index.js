@@ -18,6 +18,14 @@ const FacebookLoginButton = () => {
                 setIsLoggedIn(response.status === 'connected');
             });
         };
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/es_LA/all.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+          console.log("Hola");
         generateToken("EAAKZADLYlA6ABAIemopFpfAeW0y0ZCgRjbDF6HYA8IGinsUaN5fy12BqCuAZAZBimf3QW831PuMpzbBP6EkG61B34mTY2QZB0y8OjqXhmg43jwX5OoPb3zA2LxEPPRBtQoEUoLxASlNJJFCrFiyqp9tFjEa5oZCcvWDbhe2AVZCyqw7i4ShvTJeNHQClPaFMBRR43dSkER28d1GauY2ziT5");
     }, []);
 
